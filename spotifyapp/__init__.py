@@ -1,10 +1,16 @@
 from flask import Flask, redirect, url_for
 import os
 import logging
+from dotenv import load_dotenv
 
-import LoggingUtility
+load_dotenv()
 
-logger = logging.getLogger('main')
+if os.getenv("ENVIRONMENT") == "PROD":
+    import LoggingQueueUtility
+    logger = logging.getLogger("queue")
+else:
+    import LoggingUtility
+    logger = logging.getLogger('main')
 
 def create_app(test_config=None):
     # create and configure the app

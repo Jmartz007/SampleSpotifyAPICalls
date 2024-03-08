@@ -35,7 +35,15 @@ dictConfig(
         },
         "loggers": {
             "main": {
-                "handlers":["console", "file", "fileerrors"],
+                "handlers": ["console", "file", "fileerrors"],
+                "level": "DEBUG"
+            },
+            "files": {
+                "handlers": ["file", "fileerrors"],
+                "level": "DEBUG"
+            },
+            "queue": {
+                "handlers": ["console"],
                 "level": "DEBUG"
             }
         }
