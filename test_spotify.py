@@ -28,8 +28,6 @@ def test_search_invalid_token(mock_get):
     response == 401
 
 
-@patch('SpotifyMain.get_token')
-def test_search_valid_token(mock_get):
-    mock_get.return_value = ''
+def test_search_valid_token():
     response = search("Taylor Swift")
     assert type(response) == dict
