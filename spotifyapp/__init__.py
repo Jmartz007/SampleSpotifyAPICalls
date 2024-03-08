@@ -1,6 +1,10 @@
-from flask import Flask
+from flask import Flask, redirect, url_for
 import os
+import logging
 
+import LoggingUtility
+
+logger = logging.getLogger('main')
 
 def create_app(test_config=None):
     # create and configure the app
@@ -23,10 +27,26 @@ def create_app(test_config=None):
     except OSError:
         pass
 
+    class MyCustomException(Exception):
+        '''placeholder for defining a custom exception'''
+        pass
+
+    @app.errorhandler(Exception)
+    def custom_exception_logger(e):
+        '''errorhandler(Exception) will capture all exceptions, use a more specific exception if needed.'''
+        logger.exception("An Exception Occurred")
+        return "Custom error page", 500
+
     # a simple page that says hello
     @app.route('/hello')
     def hello():
+        logger.debug("Loading Home Page")
         return 'Hello, World!'
+    
+    @app.route('/')
+    def root():
+        logger.debug("Redirecting to home page")
+        return redirect('/hello')
 
     return app
 
