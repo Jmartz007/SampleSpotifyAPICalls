@@ -50,7 +50,7 @@ def get_token(redirect_url, access_code=0, grantType='authorization_code'):
             print("Failed to retrieve access token:", response.text)
 
 
-def search(query: str):
+def artist_search(query: str):
 
     access_token = get_token(redirect_url, grantType="client_credentials")
 
@@ -78,5 +78,5 @@ def search(query: str):
         print("No access token received. Need access token to use search.")
     
 if __name__ == "__main__":
-    response = search("Lindsey Stirling")
+    response = artist_search("Lindsey Stirling")
     print(response)

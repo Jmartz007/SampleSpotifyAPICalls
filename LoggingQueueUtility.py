@@ -36,6 +36,7 @@ listener.start()
 logger = logging.getLogger("queue")
 # logger.setLevel(logging.DEBUG)  # Log level = DEBUG
 qh = logging.handlers.QueueHandler(log_queue)
+qh.setLevel(logging.DEBUG)
 logger.addHandler(qh)
 logger.info('Look out!')  # Create INFO message
 logger.error("heres and error!")
